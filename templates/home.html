@@ -1,0 +1,43 @@
+{% extends 'layout/index.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Welcome</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <!-- <li class="breadcrumb-item active">Starter Page</li> -->
+                    </ol>
+                </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="d-flex justify-content-center alig-item-center my-5">
+                <span class="display-5">Welcome</span>
+            </div>
+        
+            <div class="d-flex justify-content-center align-items-center my-5">
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_mEjlSMiUxx.json"
+                            background="transparent" speed="1" style="width: 390px; height: 390px;" loop autoplay>
+                        </lottie-player>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'layout/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Upload Documents</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active">Docs</li>
+                </ol>
+            </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Uploaded Documents</h3>
+            </div>
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <!-- <th>File Size</th> -->
+                            <th>Uploaded By</th>
+                            <th>File Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for upload in uploads %}
+                            <tr>
+                                <td>{{ upload }}</td>
+                                <td>{{ upload.file_name }}</td>
+                                <td>{{ upload.uploaded_at }}</td>
+                                <td class="text-center">
+                                    <span class="btn btn-md">
+                                        {%if upload.active%}
+                                        Live
+                                        {% else %}
+                                            ---
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>Active</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock content %}
