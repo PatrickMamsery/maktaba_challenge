@@ -183,13 +183,8 @@
 <script src="https://kit.fontawesome.com/68b4c1056b.js" crossorigin="anonymous"></script> 
 <script src="{% static 'js/app.js' %}"></script>
 
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-</script>
+{% block scripts %}
+
+{% endblock scripts %}
 </body>
 </html>
