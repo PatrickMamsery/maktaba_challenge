@@ -3,3 +3,4 @@
 from.py
 .venv/
 __pycache__/
+.env
