@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from upload.views import home, landing, error, file_details, login_view, upload, export_csv, uploaded_docs
+from upload.views import home, landing, error, file_details, login_view, logout_view, upload, export_csv, uploaded_docs
 
 urlpatterns = [
     path('', landing, name='landing'),
     path('home', home, name='home'),
     path('login', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('error', error, name='error'),
     path('upload', upload, name='upload'),
     path('uploaded_docs', uploaded_docs, name='uploaded_docs'),
@@ -29,5 +30,8 @@ urlpatterns = [
     path('export/<int:id>', export_csv, name='export'),
     path('admin/', admin.site.urls),
 
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+
+    #API
+    path('api/v1/', include('api.urls'))
 ]

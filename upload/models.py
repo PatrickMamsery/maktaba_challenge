@@ -15,16 +15,3 @@ class CSVFile(models.Model):
 
     def get_author(self):
         return self.file_name
-
-
-# data values model
-# class Data(models.Model):
-#     file = models.ForeignKey(CSVFile, on_delete=models.CASCADE)
-#     cut = models.CharField(max_length=255)
-#     color = models.CharField(max_length=255)
-#     clarity = models.CharField(max_length=255)
-#     carat_weight = models.FloatField(verbose_name='Carat Weight')
-#     cut_quality = models.enums()
-
-#     def __str__(self):
-#         return self.name
