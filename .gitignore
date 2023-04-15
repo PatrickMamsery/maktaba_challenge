@@ -1,4 +1,5 @@
 *.sqlite3
 *.vscode
+from.py
 .venv/
 __pycache__/
