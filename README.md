@@ -29,6 +29,19 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
+For windows systems, run the following commands in the terminal:
+```
+$ py -m venv .venv
+$ .venv\Scripts\activate
+$ pip install -r requirements.txt
+```
+
+Then create a `.env` file in the project directory and add the following:
+```
+SECRET_KEY=your_secret_key
+DEBUG=True
+```
+
 ## Running the program
 Navigate to the project directory.
 To run the program, run the following commands in the terminal:
