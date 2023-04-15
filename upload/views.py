@@ -42,8 +42,8 @@ def upload(request):
         # paginator = Paginator(files, 10)
         # page = request.GET.get('page')
         # files = paginator.get_page(page)
-        uploads = CSVFile.objects.all().order_by('-id')
-        context = {'form': form, 'files': uploads}
+        uploads = CSVFile.objects.all().order_by('-uploaded_at')
+        context = {'form': form, 'uploads': uploads}
     return render(request, "upload.html", context)
 
 

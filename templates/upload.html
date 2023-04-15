@@ -23,24 +23,51 @@
 
     <!-- Main content -->
     <div class="content">
-        <div class="custom-file mb-4">
-            <div class="header">
-                <h1>File Uploader</h1>
-            </div>
-        
-            <div class="container">
-                <form id="example-form1" action="." method="post" enctype="multipart/form-data">{% csrf_token %}
-                    <label for="images" class="drop-container">
-                        <span class="drop-title">Drop files here</span>
-                        or    
-                        <input type="file" class="custom2-file-input" id="customFile" name="csv" required accept=".csv" size="60">
-                    </label>
-                    <div>
-                        <div align="center">
-                            <input type="submit" class="button" value="Submit">
-                        </div>
-                    </div>
+        <div class="container">
+            <div class="d-flex justify-content-center align-items-center my-5">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-info text-light form-control" value="Upload">
                 </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Uploaded Documents</h3>
+            </div>
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <!-- <th>File Size</th> -->
+                            <th>Uploaded By</th>
+                            <th>File Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for upload in uploads %}
+                            <tr>
+                                <td>{{ upload }}</td>
+                                <td>{{ upload.file_name }}</td>
+                                <td>{{ upload.uploaded_at }}</td>
+                                <td class="text-center">
+                                    <span class="btn btn-md">
+                                        {%if upload.active%}
+                                        Live
+                                        {% else %}
+                                            ---
+                                        {% endif %}
+                                    </span>
+                                </td>
+                                <td>Active</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -48,3 +75,15 @@
 </div>
 <!-- /.content-wrapper -->
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    $(function () {
+        $.noConflict(); // very important to use this
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+</script>
+{% endblock %}
