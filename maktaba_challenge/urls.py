@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from upload.views import home, landing, error, file_details, login_view, upload, uploaded_docs
+from upload.views import home, landing, error, file_details, login_view, upload, export_csv, uploaded_docs
 
 urlpatterns = [
     path('', landing, name='landing'),
@@ -26,6 +26,7 @@ urlpatterns = [
     path('upload', upload, name='upload'),
     path('uploaded_docs', uploaded_docs, name='uploaded_docs'),
     path('details/<int:id>', file_details, name='file_details'),
+    path('export/<int:id>', export_csv, name='export'),
     path('admin/', admin.site.urls),
 
     path('api-auth/', include('rest_framework.urls'))

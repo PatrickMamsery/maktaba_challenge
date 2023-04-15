@@ -9,6 +9,9 @@ import csv
 # import os
 
 def home(request):
+    if request.user.is_authenticated is not True:
+        return redirect("/login")
+    
     return render(request, "home.html")
 
 
@@ -21,6 +24,9 @@ def error(request):
 
 
 def uploaded_docs(request):
+    if request.user.is_authenticated is not True:
+        return redirect("/login")
+    
     uploads = CSVFile.objects.all().order_by('-uploaded_at')
     context = {'uploads': uploads}
     return render(request, "docs.html", context)
@@ -47,6 +53,9 @@ def upload(request):
 
 
 def file_details(request, id):
+    if request.user.is_authenticated is not True:
+        return redirect("/login")
+    
     file = CSVFile.objects.get(id=id)
     data = csv.reader(file.file.read().decode('utf-8').splitlines())
     headers = next(data) # assumption that first row is header information
@@ -72,10 +81,13 @@ def file_details(request, id):
 
 
 def export_csv(request, id):
+    if request.user.is_authenticated is not True:
+        return redirect("/login")
+    
     file = CSVFile.objects.get(id=id)
     data = csv.reader(file.file.read().decode('utf-8').splitlines())
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = f'attachment; filename="{file.name}.csv"'
+    response['Content-Disposition'] = f'attachment; filename="{file}.csv"'
     writer = csv.writer(response)
     for row in data:
         writer.writerow(row)

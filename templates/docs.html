@@ -56,8 +56,11 @@
                                 </td>
                                 <td>
                                     <div class="text-center">
-                                        <a href="{% url 'file_details' upload.pk %}">
-                                            <i class="fas fa-eye"></i>
+                                        <a href="{% url 'file_details' upload.pk %}" class="text-reset">
+                                            <i class="fas fa-eye mr-3"></i>
+                                        </a>
+                                        <a href="{% url 'export' upload.pk %}">
+                                            <i class="fas fa-cloud-arrow-down"></i>
                                         </a>
                                     </div>
                                 </td>
