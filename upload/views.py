@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-# from django.core.paginator import Paginator
+from django.core.paginator import Paginator
 # from django.db.models import Q
 from .models import CSVFile
 from .forms import CSVFileUploadForm
@@ -47,11 +47,29 @@ def upload(request):
     return render(request, "upload.html", context)
 
 
-def file_detail(request, id):
+def file_details(request, id):
     file = CSVFile.objects.get(id=id)
     data = csv.reader(file.file.read().decode('utf-8').splitlines())
-    context = {'file': file, 'data': data}
-    return render(request, 'file_detail.html', context)
+    headers = next(data)
+    rows = [row for row in data]
+
+    # implement pagination
+    paginator = Paginator(rows, 10)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+
+    if data is not None:
+        context = {
+            'file': file, 
+            'headers': headers, 
+            'rows': page_obj, 
+            'loaded': True,
+            'is_paginated': True if paginator.num_pages > 1 else False,
+            'page': page_obj
+        }
+        return render(request, 'file_detail.html', context)
+    else:
+        return render(request, "file_detail.html", {'msg': 'Nothing Found'})
 
 
 def export_csv(request, id):
