@@ -38,7 +38,6 @@ def upload(request):
             return redirect("upload")
     else:
         form = CSVFileUploadForm()
-        # files = CSVFile.objects.all().order_by('-uploaded_at')
         # paginator = Paginator(files, 10)
         # page = request.GET.get('page')
         # files = paginator.get_page(page)
@@ -50,7 +49,7 @@ def upload(request):
 def file_details(request, id):
     file = CSVFile.objects.get(id=id)
     data = csv.reader(file.file.read().decode('utf-8').splitlines())
-    headers = next(data)
+    headers = next(data) # assumption that first row is header information
     rows = [row for row in data]
 
     # implement pagination
