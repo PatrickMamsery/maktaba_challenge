@@ -6,7 +6,8 @@ from django.core.paginator import Paginator
 from .models import CSVFile
 from .forms import CSVFileUploadForm
 import csv
-# import os
+import os
+from maktaba_challenge.settings import BASE_DIR
 
 def home(request):
     if request.user.is_authenticated is not True:
@@ -84,7 +85,9 @@ def export_csv(request, id):
     if request.user.is_authenticated is not True:
         return redirect("/login")
     
-    file = CSVFile.objects.get(id=id)
+    # file = CSVFile.objects.get(id=id)
+    file_path = os.path.join(BASE_DIR, "media/"+CSVFile.objects.get(id=id).filename())
+    file = open(file_path, "r", "utf-8", error="ignore")
     data = csv.reader(file.file.read().decode('utf-8').splitlines())
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = f'attachment; filename="{file}.csv"'
